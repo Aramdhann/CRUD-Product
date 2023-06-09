@@ -1,6 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Profile from './Profile'
+import {
+  CForm,
+  CCol,
+  CFormInput,
+  CFormSelect,
+  CFormCheck,
+  CButton,
+  CFormTextarea,
+  CRow,
+  CDropdownItem,
+  CDropdownMenu,
+  CDropdownToggle,
+  CDropdown,
+} from '@coreui/react'
 
 export default function AddProduct() {
   const navigate = useNavigate()
@@ -53,7 +67,7 @@ export default function AddProduct() {
   }
 
   const create = () => {
-    const validate = ['name', 'description', 'price', 'date', 'type']
+    const validate = ['name', 'description', 'price', 'date', 'uom']
     let errs = {}
     for (let i = 0; i < validate.length; i++) {
       if (!event[validate[i]]) {
@@ -98,70 +112,78 @@ export default function AddProduct() {
 
   return (
     <div>
-      <div className="form">
-        <div className="title">
+      <CForm className="form">
+        <div className="title bold fs-4">
           <p>{event.id ? 'Update' : 'Add'} Product</p>
         </div>
-        <div className="space"></div>
-        <div>
-          <label>
-            Nama Produk<span className="mandatory">*</span>
-          </label>
-          <div className="space"></div>
-          <input type="text" name="name" value={event.name || ''} onChange={handleChange} />
+        <CCol md={12}>
+          <CFormInput
+            label="Nama Produk"
+            type="text"
+            name="name"
+            value={event.name || ''}
+            onChange={handleChange}
+          />
           {!!errors.name && <span className="mandatory">{errors.name}</span>}
-        </div>
-        <div className="space"></div>
-        <div>
-          <label>
-            Deskripsi Produk<span className="mandatory">*</span>
-          </label>
-          <textarea
-            style={{ width: '100%' }}
-            rows="4"
+        </CCol>
+        <CCol md={12} className="mt-3">
+          <CFormTextarea
+            label="Deskripsi Produk"
+            type="text"
             name="description"
+            placeholder="Write description product here"
+            id="floatingTextarea2"
+            style={{ height: '150px' }}
             value={event.description || ''}
             onChange={handleChange}
-          ></textarea>
-          {!!errors.description && <span className="mandatory">{errors.description}</span>}
-        </div>
-        <div className="space"></div>
-        <label>
-          Harga Produk<span className="mandatory">*</span>
-        </label>
-        <div className="space"></div>
-        <input type="text" name="price" value={event.price || ''} onChange={handleChange} />
-        {!!errors.price && <span className="mandatory">{errors.price}</span>}
-        <div className="space"></div>
-        <label>
-          Date<span className="mandatory">*</span>
-        </label>
-        <div className="space"></div>
-        <input type="date" name="date" value={event.date || ''} onChange={handleChange} />
-        {!!errors.date && <span className="mandatory">{errors.date}</span>}
-        <div className="space"></div>
-        <div>
-          <label>
-            UOM (Unit of Measurement)<span className="mandatory">*</span>
-          </label>
-          <div className="space"></div>
-          <select name="uom" value={event.uom} onChange={handleChange}>
-            <option hidden>Select UOM</option>
-            <option value="SHEET">SHEET</option>
-            <option value="ROLL">ROLL</option>
-            <option value="PCS">PCS</option>
-          </select>
-          {!!errors.uom && <span className="mandatory">{errors.uom}</span>}
-        </div>
-        <br></br>
-        <div className="space"></div>
-        <div>
-          <button onClick={() => cancel()}>Cancel</button>
-          <button style={{ marginLeft: '5px' }} onClick={() => create()}>
+          ></CFormTextarea>
+        </CCol>
+        <CRow>
+          <CCol md={4} className="mt-3">
+            <CFormInput
+              label="Harga Produk"
+              type="text"
+              name="price"
+              value={event.price || ''}
+              onChange={handleChange}
+            />
+            {!!errors.price && <span className="mandatory">{errors.price}</span>}
+          </CCol>
+          <CCol md={4} className="mt-3">
+            <CFormInput
+              label="Tanggal Produk"
+              type="date"
+              name="date"
+              value={event.date || ''}
+              onChange={handleChange}
+            />
+            {!!errors.date && <span className="mandatory">{errors.date}</span>}
+          </CCol>
+          <CCol md={4} className="mt-3">
+            <CFormSelect
+              id="inputState"
+              label="UOM (Unit of Measurement)"
+              name="uom"
+              value={event.uom}
+              onChange={handleChange}
+            >
+              <option hidden>Choose...</option>
+              <option value="SHEET">SHEET</option>
+              <option value="ROLL">ROLL</option>
+              <option value="PCS">PCS</option>
+            </CFormSelect>
+            {!!errors.uom && <span className="mandatory">{errors.uom}</span>}
+          </CCol>
+        </CRow>
+        <CCol xs={12} className="mt-3">
+          <CButton type="submit" onClick={() => cancel()}>
+            Cancel
+          </CButton>
+          <CButton type="submit" onClick={() => create()} className="ms-3">
             {event.id ? 'Update' : 'Create'}
-          </button>
-        </div>
-      </div>
+          </CButton>
+        </CCol>
+      </CForm>
     </div>
   )
 }

@@ -55,7 +55,7 @@ export default function EventPage() {
                 <td>{item.description}</td>
                 <td>{item.date}</td>
                 <td>{item.price}</td>
-                <td>{item.type}</td>
+                <td>{item.uom}</td>
                 <td>
                   <button onClick={() => navigate(`/add-product/${item.id}`)}>Edit</button>
                 </td>
