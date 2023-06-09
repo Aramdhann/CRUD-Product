@@ -3,7 +3,6 @@
   "version": "4.5.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://aramdhann.github.io/crud-product",
   "license": "MIT",
   "author": "aramdhann",
   "scripts": {
