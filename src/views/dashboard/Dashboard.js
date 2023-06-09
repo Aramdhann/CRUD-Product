@@ -2,6 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Profile from '../../components/Profile'
 import { getUser } from '../../components/User'
+import {
+  CButton,
+  CTable,
+  CTableHead,
+  CTableBody,
+  CTableRow,
+  CTableHeaderCell,
+  CTableDataCell,
+} from '@coreui/react'
 
 export default function EventPage() {
   const navigate = useNavigate()
@@ -32,42 +41,54 @@ export default function EventPage() {
 
   return (
     <div>
-      <div className="eventPage">
-        <table className="table">
-          <thead>
-            <tr>
-              <th width="6%">Kode Produk</th>
-              <th>Nama Produk</th>
-              <th>Deskrpsi Produk</th>
-              <th>Date</th>
-              <th>Harga Produk</th>
-              <th>UOM (Unit of Measurement) </th>
-              <th width="10%" colSpan="2">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {events?.map((item, i) => (
-              <tr key={i}>
-                <td>{i + 1}</td>
-                <td>{item.name}</td>
-                <td>{item.description}</td>
-                <td>{item.date}</td>
-                <td>{item.price}</td>
-                <td>{item.uom}</td>
-                <td>
-                  <button onClick={() => navigate(`/add-product/${item.id}`)}>Edit</button>
-                </td>
-                <td>
-                  <button onClick={() => deleteEvent(item.id)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {!events.length && <p style={{ textAlign: 'center', marginTop: '15px' }}>No results</p>}
-      </div>
+      <CTable responsive>
+        <CTableHead className="bg-white">
+          <CTableRow>
+            <CTableHeaderCell className="border" width="6%">
+              Kode Produk
+            </CTableHeaderCell>
+            <CTableHeaderCell className="border">Nama Produk</CTableHeaderCell>
+            <CTableHeaderCell className="border">Deskripsi Produk</CTableHeaderCell>
+            <CTableHeaderCell className="border">Date</CTableHeaderCell>
+            <CTableHeaderCell className="border">Harga Produk</CTableHeaderCell>
+            <CTableHeaderCell className="border">UOM (Unit of Measurement)</CTableHeaderCell>
+            <CTableHeaderCell className="border" colSpan="2">
+              Action
+            </CTableHeaderCell>
+          </CTableRow>
+        </CTableHead>
+        <CTableBody className="bg-white">
+          {events?.map((item, i) => (
+            <CTableRow key={i}>
+              <CTableDataCell className="border">{i + 1}</CTableDataCell>
+              <CTableDataCell className="border">{item.name}</CTableDataCell>
+              <CTableDataCell className="border">{item.description}</CTableDataCell>
+              <CTableDataCell className="border">{item.date}</CTableDataCell>
+              <CTableDataCell className="border">{item.price}</CTableDataCell>
+              <CTableDataCell className="border">{item.uom}</CTableDataCell>
+              <CTableDataCell className="border">
+                <CButton
+                  className="m-1"
+                  color="primary"
+                  onClick={() => navigate(`/add-product/${item.id}`)}
+                >
+                  Edit
+                </CButton>
+              </CTableDataCell>
+              <CTableDataCell>
+                <CButton
+                  className="text-white m-1"
+                  color="danger"
+                  onClick={() => deleteEvent(item.id)}
+                >
+                  Delete
+                </CButton>
+              </CTableDataCell>
+            </CTableRow>
+          ))}
+        </CTableBody>
+      </CTable>
+      {!events.length && <p style={{ textAlign: 'center', marginTop: '15px' }}>No results</p>}
     </div>
   )
 }

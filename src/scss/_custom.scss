@@ -19,69 +19,11 @@ textarea {
   resize: none;
 }
 
-button {
-  width: fit-content;
-}
-
-.card {
-  margin: auto;
-  display: table;
-  box-shadow: 0 0 2px 0 #888888;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.card .form {
-  width: 370px;
-  padding: 30px 40px;
-}
-
-.card .space {
-  margin: 15px 0;
-}
-
-.card .title p {
-  font-weight: bold;
-  font-size: 24px;
-}
-
-.card .account {
-  color: blue;
-  cursor: pointer;
-}
-
 .eventPage {
   width: 70%;
   margin: auto;
 }
 
-.table {
-  width: 100%;
-}
-
-.table button {
-  padding: 2px;
-  width: 50px;
-}
-
-table,
-th,
-td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  padding: 3px 5px;
-}
-
-th {
-  text-align: left;
-}
 .bold {
     font-weight: bold;
 }
